@@ -15,3 +15,6 @@ A custom render engine for Blender's Video Sequence Editor (VSE), providing adva
 - Switch to the `VSEndless` render engine.
 - Customize settings in the Output Properties panel.
 - Render using the VSE timeline.
+
+
+https://youtu.be/Ef5L1jIJzUM
