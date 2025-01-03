@@ -2,7 +2,7 @@
 so I started doing some video editing with my drone videos---then video editing for other people----then discovered ffmpeg, cudatoolkit, and yeah now Im here
 
 #So I am greatly humbled by all the positive feedback from you guys out there, just bear with me, I'm not super good at this yet lol
-I'm very open to constructive criticism, thnaks again!
+I'm very open to constructive criticism, thanks again!
 
 
 # VSEndless Add-on
