@@ -1,7 +1,13 @@
+
 import bpy
 import subprocess
+<<<<<<< HEAD:operators/render_operator.py
 from ..utils.ffmpeg_utils import construct_ffmpeg_command, call_groq_api
 from ..utils.sequence_utils import extract_timeline_data
+=======
+from .ffmpeg_utils import construct_ffmpeg_command
+from .sequence_utils import extract_timeline_data
+>>>>>>> 05119fb (zipped correct format for direct download and install into blender):vsendless/render_operator.py
 
 class VSEndlessRenderEngine(bpy.types.RenderEngine):
     bl_idname = "VSENDLESS_RENDER_ENGINE"
@@ -39,3 +45,9 @@ class VSEndlessRenderEngine(bpy.types.RenderEngine):
         except subprocess.CalledProcessError as e:
             self.report({'ERROR'}, f"FFmpeg failed: {e.stderr}")
             print(e.stderr)
+
+def register():
+    bpy.utils.register_class(VSEndlessRenderEngine)
+
+def unregister():
+    bpy.utils.unregister_class(VSEndlessRenderEngine)
