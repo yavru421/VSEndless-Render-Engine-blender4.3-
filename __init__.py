@@ -1,20 +1,23 @@
-bl_info = {
-    "name": "VSEndless - GPU Accelerated Render Engine",
-    "blender": (4, 3, 0),
-    "category": "Render",
-    "version": (3, 0, 2),
-    "description": "NVIDIA GPU accelerated render engine for Blender's VSE with CUDA, NVENC and advanced post-processing.",
-    "author": "John Daniel Dondlinger",
-}
-
 import bpy
-import subprocess
-import shutil
-import os
+from . import operators
+from . import properties
+from . import ui
 from .operators.render_operator import VSEndlessRenderEngine
-from .ui.render_panel import VSEndlessRenderPanel
 from .properties.render_properties import register_properties, unregister_properties
+from .ui.render_panel import VSEndlessRenderPanel
 from .utils.presets import register_presets, unregister_presets
+
+bl_info = {
+    "name": "VSEndless Render Engine",
+    "author": "yavru421",
+    "version": (2, 0, 0),
+    "blender": (4, 3, 0),
+    "location": "Properties > Output > VSEndless Render Settings",
+    "description": "GPU-accelerated render engine for video sequences using FFmpeg with NVENC",
+    "warning": "",
+    "doc_url": "https://github.com/yavru421/VSEndless-Render-Engine-blender4.3-",
+    "category": "Render",
+}
 
 def check_gpu_capabilities():
     """Check for NVIDIA GPU and FFmpeg with NVENC support"""
@@ -64,10 +67,20 @@ def show_gpu_notification(self, context):
         self.layout.label(text="VSEndless: No NVIDIA GPU detected, falling back to CPU rendering")
 
 def register():
+    # Register render engine
     bpy.utils.register_class(VSEndlessRenderEngine)
-    bpy.utils.register_class(VSEndlessRenderPanel)
+    
+    # Register properties
     register_properties()
+    
+    # Register UI panel
+    bpy.utils.register_class(VSEndlessRenderPanel)
+    
+    # Register presets
     register_presets()
+    
+    # Add to render engine list
+    bpy.types.RenderEngine.VSENDLESS_RENDER_ENGINE = 'VSENDLESS_RENDER_ENGINE'
     
     # Store GPU information
     gpu_info = check_gpu_capabilities()
@@ -82,10 +95,20 @@ def register():
     print(f"VSEndless Render Engine initialized. GPU Acceleration: {'Available' if gpu_info['has_nvidia'] and gpu_info['has_nvenc'] else 'Limited or Unavailable'}")
 
 def unregister():
-    bpy.utils.unregister_class(VSEndlessRenderEngine)
-    bpy.utils.unregister_class(VSEndlessRenderPanel)
-    unregister_properties()
+    # Remove from render engine list
+    del bpy.types.RenderEngine.VSENDLESS_RENDER_ENGINE
+    
+    # Unregister presets
     unregister_presets()
+    
+    # Unregister UI panel
+    bpy.utils.unregister_class(VSEndlessRenderPanel)
+    
+    # Unregister properties
+    unregister_properties()
+    
+    # Unregister render engine
+    bpy.utils.unregister_class(VSEndlessRenderEngine)
     
     if hasattr(bpy.types, "vsendless_gpu_info"):
         delattr(bpy.types, "vsendless_gpu_info")

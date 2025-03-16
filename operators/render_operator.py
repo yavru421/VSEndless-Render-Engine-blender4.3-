@@ -5,8 +5,10 @@ from ..utils.sequence_utils import extract_timeline_data
 
 class VSEndlessRenderEngine(bpy.types.RenderEngine):
     bl_idname = "VSENDLESS_RENDER_ENGINE"
-    bl_label = "VSEndless Render Engine"
+    bl_label = "VSEndless"
     bl_use_preview = False
+    bl_use_exclude_layers = True
+    bl_use_shading_nodes_custom = False
 
     def render(self, depsgraph):
         scene = depsgraph.scene
