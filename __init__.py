@@ -1,9 +1,9 @@
 bl_info = {
-    "name": "VSEndless - Advanced FFmpeg Render Engine",
+    "name": "VSEndless2.0 - Advanced FFmpeg Render Engine",
     "blender": (4, 3, 0),
     "category": "Render",
-    "version": (3, 0, 1),
-    "description": "Highly customizable render engine for Blender's VSE with advanced FFmpeg post-processing and preset management.",
+    "version": (3, 1, 0),
+    "description": "VSEndless2.0: Next-gen customizable render engine for Blender's VSE with advanced FFmpeg, Groq AI, and preset management.",
     "author": "John Daniel Dondlinger",
 }
 

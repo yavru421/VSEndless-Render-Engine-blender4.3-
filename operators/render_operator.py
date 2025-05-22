@@ -1,6 +1,6 @@
 import bpy
 import subprocess
-from ..utils.ffmpeg_utils import construct_ffmpeg_command
+from ..utils.ffmpeg_utils import construct_ffmpeg_command, call_groq_api
 from ..utils.sequence_utils import extract_timeline_data
 
 class VSEndlessRenderEngine(bpy.types.RenderEngine):
@@ -11,6 +11,13 @@ class VSEndlessRenderEngine(bpy.types.RenderEngine):
     def render(self, depsgraph):
         scene = depsgraph.scene
         output_path = bpy.path.abspath(scene.render.filepath)
+
+        # Use Groq API for AI-powered enhancements if enabled
+        if getattr(scene, 'groq_api_enabled', False) and getattr(scene, 'groq_api_key', None):
+            prompt = f"Suggest creative post-processing for a {scene.output_format} render, {scene.ffmpeg_codec} codec, {scene.ffmpeg_bitrate} Mbps, preset {scene.ffmpeg_preset}. User LUT: {scene.lut_file_path if scene.apply_lut else 'None'}."
+            ai_suggestion = call_groq_api(prompt, scene.groq_api_key)
+            self.report({'INFO'}, f"Groq AI Suggestion: {ai_suggestion}")
+            print(f"Groq AI Suggestion: {ai_suggestion}")
 
         if not output_path.endswith(".mp4"):
             output_path += ".mp4"

@@ -1,33 +1,49 @@
-VSEndless - Advanced FFmpeg Render Engine for Blender's VSE
+# VSEndless2.0 - Advanced FFmpeg Render Engine for Blender
 
-The VSEndless render engine is a custom solution designed specifically for Blender's Video Sequence Editor (VSE), integrating advanced FFmpeg capabilities directly into the rendering process. By enabling fine-tuned control over encoding settings such as resolution, codec (H.264/H.265), bitrate, and audio parameters, VSEndless ensures professional-grade outputs with unparalleled customization.
+![License: GPLv3](https://img.shields.io/badge/License-GPLv3-blue.svg)
 
-Key features include:
+## Overview
+VSEndless2.0 is a next-generation, highly customizable render engine for Blender's Video Sequence Editor (VSE). It features advanced FFmpeg post-processing, Groq AI-powered creative suggestions, and a robust preset management system.
 
-Seamless FFmpeg integration for optimized video and audio processing.
-Support for NVENC hardware encoding for faster renders.
-Flexible aspect ratio, custom frame rate, and sample rate configurations.
-Intuitive UI in Blender’s Properties panel, allowing straightforward adjustments.
-The engine processes the timeline data from the VSE, constructs an FFmpeg pipeline with custom filters (e.g., Lanczos scaling), and outputs high-quality MP4 files tailored to your specifications. Built with creators in mind, VSEndless bridges the gap between Blender’s VSE and powerful external encoding tools.
+- **Multi-format output:** MP4, MKV, MOV, GIF, PNG sequence, WAV, MP3
+- **Advanced FFmpeg presets:** e.g., Instagram-ready image sequences
+- **Groq AI integration:** Get creative post-processing suggestions
+- **Named presets:** Save, load, import, and export your favorite settings
+- **Modern UI:** All options available in Blender's Output Properties panel
 
+## Installation
+1. Download the latest `VSEndless2_0.zip` from the releases or build it yourself.
+2. In Blender, go to **Edit > Preferences > Add-ons > Install...**
+3. Select the zip file and enable **VSEndless2.0 - Advanced FFmpeg Render Engine**.
+4. Find the VSEndless2.0 panel in the Output Properties tab.
 
-https://youtu.be/Ef5L1jIJzUM
-# VSEndless - Advanced FFmpeg Render Engine for Blender's VSE
+## Usage
+- Set up your VSE timeline as usual.
+- Configure your render and FFmpeg options in the VSEndless2.0 panel.
+- (Optional) Enable Groq API and enter your API key for AI-powered suggestions.
+- Click render and enjoy advanced, customizable output!
 
-The VSEndless render engine is a custom solution designed specifically for Blender's Video Sequence Editor (VSE), integrating advanced FFmpeg capabilities directly into the rendering process.
+## Features
+- **Output formats:** MP4, MKV, MOV, GIF, PNG sequence, WAV, MP3
+- **Video codecs:** H.264, H.265, ProRes, GIF, PNG
+- **Audio codecs:** AAC, MP3, WAV (PCM)
+- **Advanced presets:** Instagram square, custom FPS, LUT, denoise, stabilization
+- **Groq AI:** Get creative tips and post-processing ideas during render
+- **Preset management:** Save, load, import, export, and list named presets
 
-Key features include:
+## Development
+- Python 3.10+, Blender 4.3+
+- All code is modular and extensible
+- Contributions and issues welcome!
 
-- Seamless FFmpeg integration for optimized video and audio processing.
-- Support for NVENC hardware encoding for faster renders.
-- Flexible aspect ratio, custom frame rate, and sample rate configurations.
-- Intuitive UI in Blender’s Properties panel, allowing straightforward adjustments.
-- The engine processes the timeline data from the VSE, constructs an FFmpeg pipeline with custom filters (e.g., Lanczos scaling), and outputs high-quality MP4 files tailored to your specifications.
+## License
+This project is licensed under the GNU GPL v3. See [LICENSE](LICENSE) for details.
 
 ---
 
-### Stress Test in Action
+## Demo & Showcase
+- [ ] Add screenshots and demo videos here!
 
-VSEndless has undergone a rigorous stress test while editing NFL Draft videos and has proven to work swimmingly in Blender 4.4 and 4.4.2.
-
-[Demo Video](https://youtu.be/Ef5L1jIJzUM)
+## Credits
+- John Daniel Dondlinger (author)
+- Powered by Blender, FFmpeg, and Groq

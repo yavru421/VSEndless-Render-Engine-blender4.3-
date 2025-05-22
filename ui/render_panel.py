@@ -21,13 +21,24 @@ class VSEndlessRenderPanel(bpy.types.Panel):
 
         # VSEndless Video Settings
         layout.label(text="VSEndless Video Settings:")
+        layout.prop(scene, "output_format", text="Output Format")
         layout.prop(scene, "ffmpeg_codec", text="Codec")
+        layout.prop(scene, "audio_codec", text="Audio Codec")
         layout.prop(scene, "ffmpeg_bitrate", text="Bitrate (Mbps)")
         layout.prop(scene, "ffmpeg_preset", text="Encoding Preset")
+        layout.prop(scene, "ffmpeg_advanced_preset", text="Advanced Preset")
         layout.prop(scene, "ffmpeg_aspect_ratio", text="Aspect Ratio")
         layout.prop(scene, "ffmpeg_custom_fps", text="Custom FPS")
         if scene.ffmpeg_custom_fps:
             layout.prop(scene, "ffmpeg_frame_rate", text="Frame Rate")
+
+        layout.separator()
+
+        # Groq API Integration
+        layout.label(text="Groq AI Integration:")
+        layout.prop(scene, "groq_api_enabled", text="Enable Groq API")
+        if scene.groq_api_enabled:
+            layout.prop(scene, "groq_api_key", text="Groq API Key")
 
         layout.separator()
 
@@ -43,6 +54,11 @@ class VSEndlessRenderPanel(bpy.types.Panel):
 
         # Presets
         layout.label(text="Presets:")
-        layout.operator("vsendless.save_preset", text="Save Preset")
-        layout.operator("vsendless.load_preset", text="Load Preset")
-        layout.operator("vsendless.reset_preset", text="Reset to Defaults")
+        row = layout.row(align=True)
+        row.operator("vsendless.save_preset_named", text="Save Preset")
+        row.operator("vsendless.load_preset_named", text="Load Preset")
+        row.operator("vsendless.list_presets", text="List Presets")
+        row = layout.row(align=True)
+        row.operator("vsendless.export_preset", text="Export Preset")
+        row.operator("vsendless.import_preset", text="Import Preset")
+        row.operator("vsendless.reset_preset", text="Reset to Defaults")
