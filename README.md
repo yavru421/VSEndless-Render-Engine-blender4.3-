@@ -1,5 +1,7 @@
 <img width="1324" height="868" alt="vsess" src="https://github.com/user-attachments/assets/e6e4637d-9722-42d0-aec5-c4635851b50a" />
 
+“VSEndless handles complex multi-track sequences with overlapping images, audio sync, and compositing in a single pass—no manual baking required.”
+
 # 🚀 QUICK START - RUN IN BLENDER'S SCRIPTING TAB
 
 > **💡 SIMPLE INSTALLATION**: Copy `vsendless_singlefile.py` → Paste in Blender Scripting Tab → Run Script → Done!
