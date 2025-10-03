@@ -16,6 +16,9 @@ def create_release_package():
     version = "5.0.0"
     date_str = datetime.datetime.now().strftime("%Y%m%d")
 
+    # Add-on directory name (what Blender will see as the add-on folder)
+    addon_dir_name = "VSEndless_GPU_Render_Engine"
+
     # Package name
     package_name = f"VSEndless_GPU_Render_Engine_v{version}_{date_str}.zip"
 
@@ -37,6 +40,7 @@ def create_release_package():
     ]
 
     print(f"Creating release package: {package_name}")
+    print(f"Add-on will be installed as: {addon_dir_name}")
 
     with zipfile.ZipFile(package_name, 'w', zipfile.ZIP_DEFLATED) as zipf:
         for pattern in include_patterns:
@@ -49,13 +53,15 @@ def create_release_package():
                     )
 
                     if not should_exclude:
-                        # Add file to ZIP with relative path
-                        arcname = file_path.relative_to(current_dir)
+                        # Add file to ZIP inside the add-on directory
+                        relative_path = file_path.relative_to(current_dir)
+                        arcname = Path(addon_dir_name) / relative_path
                         zipf.write(file_path, arcname)
                         print(f"  Added: {arcname}")
 
     print(f"\n✅ Release package created: {package_name}")
     print(f"📦 Ready for Blender add-on installation!")
+    print(f"🔧 Install by: Edit > Preferences > Add-ons > Install... > Select ZIP")
 
     return package_name
 
