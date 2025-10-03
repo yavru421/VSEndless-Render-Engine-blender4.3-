@@ -5,14 +5,16 @@
 bl_info = {
     "name": "VSEndless - GPU Accelerated Render Engine (APT)",
     "author": "yavru421",
-    "version": (5, 0, 0),
+    "version": (5, 0, 1),
     "blender": (4, 5, 0),
     "location": "Video Sequence Editor > Sidebar > VSEndless",
     "description": "APT-compliant GPU-accelerated render engine with AI and cloud capabilities",
     "category": "Sequencer",
     "doc_url": "https://github.com/yavru421/VSEndless-Render-Engine-blender4.3-",
     "tracker_url": "https://github.com/yavru421/VSEndless-Render-Engine-blender4.3-/issues",
-    "support": "COMMUNITY"
+    "support": "COMMUNITY",
+    "versionsize": "5.0.1",
+    "package_size_kb": 48
 }
 
 # APT Pipeline: Import and register all modules with algebraic composition
@@ -128,14 +130,28 @@ def register():
     print("[APT] Initializing VSEndless with Algebraic Pipeline Theory")
 
     # APT Stage 1: Core engine registration
-    bpy.utils.register_class(VSEndlessRenderEngine)
-    VSEndlessRenderEngine.register()
+    try:
+        bpy.utils.register_class(VSEndlessRenderEngine)
+        VSEndlessRenderEngine.register()
+    except Exception as e:
+        print(f"[APT] Error registering VSEndlessRenderEngine: {e}")
+        try:
+            VSEndlessRenderEngine.unregister()
+            bpy.utils.unregister_class(VSEndlessRenderEngine)
+        except Exception:
+            pass
+        raise
 
     # APT Stage 2: Module registration (order matters for dependencies)
-    utils.register()      # Base utilities first
-    properties.register() # Properties depend on utilities
-    operators.register()  # Operators depend on properties and utilities
-    ui.register()        # UI depends on all previous stages
+    try:
+        utils.register()      # Base utilities first
+        properties.register() # Properties depend on utilities
+        operators.register()  # Operators depend on properties and utilities
+        ui.register()        # UI depends on all previous stages
+    except Exception as e:
+        print(f"[APT] Error in module registration: {e}")
+        unregister()
+        raise
 
     print("[APT] VSEndless pipeline stages activated successfully")
 
@@ -144,15 +160,30 @@ def unregister():
     print("[APT] Deactivating VSEndless pipeline stages")
 
     # APT Cleanup: Reverse dependency order
-    ui.unregister()
-    operators.unregister()
-    properties.unregister()
-    utils.unregister()
+    try:
+        ui.unregister()
+    except Exception as e:
+        print(f"[APT] Error unregistering UI: {e}")
+    try:
+        operators.unregister()
+    except Exception as e:
+        print(f"[APT] Error unregistering operators: {e}")
+    try:
+        properties.unregister()
+    except Exception as e:
+        print(f"[APT] Error unregistering properties: {e}")
+    try:
+        utils.unregister()
+    except Exception as e:
+        print(f"[APT] Error unregistering utils: {e}")
 
     try:
         VSEndlessRenderEngine.unregister()
+    except Exception as e:
+        print(f"[APT] Error unregistering VSEndlessRenderEngine: {e}")
+    try:
         bpy.utils.unregister_class(VSEndlessRenderEngine)
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"[APT] Error unregistering class VSEndlessRenderEngine: {e}")
 
     print("[APT] VSEndless pipeline deactivated")

@@ -184,20 +184,29 @@ class VSEndless_OT_AIPlaceholder(bpy.types.Operator):
 
 def register():
     try:
-        bpy.utils.register_class(VSEndless_PT_AIPanel)
-        bpy.utils.register_class(VSEndless_PT_AIProperties)
-        bpy.utils.register_class(VSEndless_PT_AIStripPanel)
-        bpy.utils.register_class(VSEndless_OT_AIPlaceholder)
-        logger.info("VSEndless AI UI panels registered")
+        try:
+            for cls in [VSEndless_PT_AIPanel, VSEndless_PT_AIProperties, VSEndless_PT_AIStripPanel, VSEndless_OT_AIPlaceholder]:
+                try:
+                    bpy.utils.unregister_class(cls)
+                except Exception:
+                    pass
+                bpy.utils.register_class(cls)
+            logger.info("VSEndless AI UI panels registered")
+        except Exception as e:
+            logger.warning(f"AI UI panel registration issue: {e}")
+            raise
     except RuntimeError as e:
         logger.warning(f"AI UI panel registration issue: {e}")
 
 def unregister():
     try:
-        bpy.utils.unregister_class(VSEndless_PT_AIPanel)
-        bpy.utils.unregister_class(VSEndless_PT_AIProperties)
-        bpy.utils.unregister_class(VSEndless_PT_AIStripPanel)
-        bpy.utils.unregister_class(VSEndless_OT_AIPlaceholder)
-        logger.info("VSEndless AI UI panels unregistered")
+        try:
+            bpy.utils.unregister_class(VSEndless_PT_AIPanel)
+            bpy.utils.unregister_class(VSEndless_PT_AIProperties)
+            bpy.utils.unregister_class(VSEndless_PT_AIStripPanel)
+            bpy.utils.unregister_class(VSEndless_OT_AIPlaceholder)
+            logger.info("VSEndless AI UI panels unregistered")
+        except Exception as e:
+            logger.warning(f"AI UI panel unregistration issue: {e}")
     except RuntimeError as e:
         logger.warning(f"AI UI panel unregistration issue: {e}")

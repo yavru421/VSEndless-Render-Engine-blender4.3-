@@ -356,27 +356,32 @@ class VSEndless_OT_AIOptimizeSettings(bpy.types.Operator):
             scene.use_multipass = settings["multipass"]
 
 def register():
-    bpy.utils.register_class(VSEndless_OT_AIAnalyzeTimeline)
-    bpy.utils.register_class(VSEndless_OT_AIUpscale)
-    bpy.utils.register_class(VSEndless_OT_AISceneDetection)
-    bpy.utils.register_class(VSEndless_OT_AIOptimizeSettings)
-
-    # Add AI properties to scene
-    bpy.types.Scene.vsendless_auto_apply_ai = bpy.props.BoolProperty(
-        name="Auto-Apply AI Recommendations",
-        description="Automatically apply AI encoding recommendations",
-        default=True
-    )
-
-    logger.info("VSEndless AI operators registered")
+    try:
+        for cls in [VSEndless_OT_AIAnalyzeTimeline, VSEndless_OT_AIUpscale, VSEndless_OT_AISceneDetection, VSEndless_OT_AIOptimizeSettings]:
+            try:
+                bpy.utils.unregister_class(cls)
+            except Exception:
+                pass
+            bpy.utils.register_class(cls)
+        # Add AI properties to scene
+        bpy.types.Scene.vsendless_auto_apply_ai = bpy.props.BoolProperty(
+            name="Auto-Apply AI Recommendations",
+            description="Automatically apply AI encoding recommendations",
+            default=True
+        )
+        logger.info("VSEndless AI operators registered")
+    except Exception as e:
+        logger.warning(f"AI operator registration issue: {e}")
+        raise
 
 def unregister():
-    bpy.utils.unregister_class(VSEndless_OT_AIAnalyzeTimeline)
-    bpy.utils.unregister_class(VSEndless_OT_AIUpscale)
-    bpy.utils.unregister_class(VSEndless_OT_AISceneDetection)
-    bpy.utils.unregister_class(VSEndless_OT_AIOptimizeSettings)
-
-    if hasattr(bpy.types.Scene, 'vsendless_auto_apply_ai'):
-        del bpy.types.Scene.vsendless_auto_apply_ai
-
-    logger.info("VSEndless AI operators unregistered")
+    try:
+        bpy.utils.unregister_class(VSEndless_OT_AIAnalyzeTimeline)
+        bpy.utils.unregister_class(VSEndless_OT_AIUpscale)
+        bpy.utils.unregister_class(VSEndless_OT_AISceneDetection)
+        bpy.utils.unregister_class(VSEndless_OT_AIOptimizeSettings)
+        if hasattr(bpy.types.Scene, 'vsendless_auto_apply_ai'):
+            del bpy.types.Scene.vsendless_auto_apply_ai
+        logger.info("VSEndless AI operators unregistered")
+    except Exception as e:
+        logger.warning(f"AI operator unregistration issue: {e}")

@@ -211,12 +211,28 @@ def register():
         description="RTMP streaming URL for direct output",
         default="rtmp://localhost/live"
     )
-    bpy.utils.register_class(VSEndlessProperties)
-    bpy.types.Scene.vsendless_props = bpy.props.PointerProperty(type=VSEndlessProperties)
+    try:
+        try:
+            bpy.utils.unregister_class(VSEndlessProperties)
+        except Exception:
+            pass
+        bpy.utils.register_class(VSEndlessProperties)
+        bpy.types.Scene.vsendless_props = bpy.props.PointerProperty(type=VSEndlessProperties)
+    except Exception as e:
+        print(f"[APT] Error registering VSEndlessProperties: {e}")
+        raise
     # No class property registration for ffmpeg_filter; use ID property system (strip['ffmpeg_filter'])
 
 def unregister():
-    del bpy.types.Scene.vsendless_rtmp_url
-    del bpy.types.Scene.vsendless_props
-    pass  # No class property to unregister for ffmpeg_filter
-    bpy.utils.unregister_class(VSEndlessProperties)
+    try:
+        del bpy.types.Scene.vsendless_rtmp_url
+    except Exception as e:
+        print(f"[APT] Error deleting vsendless_rtmp_url: {e}")
+    try:
+        del bpy.types.Scene.vsendless_props
+    except Exception as e:
+        print(f"[APT] Error deleting vsendless_props: {e}")
+    try:
+        bpy.utils.unregister_class(VSEndlessProperties)
+    except Exception as e:
+        print(f"[APT] Error unregistering VSEndlessProperties: {e}")

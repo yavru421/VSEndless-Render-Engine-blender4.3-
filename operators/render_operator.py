@@ -168,14 +168,16 @@ class VSEndless_OT_AddonRefresh(bpy.types.Operator):
 
 def register():
     try:
-        bpy.utils.register_class(VSEndless_OT_Render)
-        bpy.utils.register_class(VSEndless_OT_RenderQueue)
-        bpy.utils.register_class(VSEndless_OT_Stream)
-        bpy.utils.register_class(VSEndless_OT_CheckGPU)
-        bpy.utils.register_class(VSEndless_OT_AddonRefresh)
+        for cls in [VSEndless_OT_Render, VSEndless_OT_RenderQueue, VSEndless_OT_Stream, VSEndless_OT_CheckGPU, VSEndless_OT_AddonRefresh]:
+            try:
+                bpy.utils.unregister_class(cls)
+            except Exception:
+                pass
+            bpy.utils.register_class(cls)
         logger.info("VSEndless operators registered")
-    except RuntimeError as e:
+    except Exception as e:
         logger.warning(f"Operator registration issue: {e}")
+        raise
 
 def unregister():
     try:
@@ -185,5 +187,5 @@ def unregister():
         bpy.utils.unregister_class(VSEndless_OT_CheckGPU)
         bpy.utils.unregister_class(VSEndless_OT_AddonRefresh)
         logger.info("VSEndless operators unregistered")
-    except RuntimeError as e:
+    except Exception as e:
         logger.warning(f"Operator unregistration issue: {e}")

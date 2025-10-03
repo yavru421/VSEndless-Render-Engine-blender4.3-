@@ -17,7 +17,18 @@ class VSENDLESS4_OT_CreateWorkspace(bpy.types.Operator):
         return {'FINISHED'}
 
 def register():
-    bpy.utils.register_class(VSENDLESS4_OT_CreateWorkspace)
+    try:
+        try:
+            bpy.utils.unregister_class(VSENDLESS4_OT_CreateWorkspace)
+        except Exception:
+            pass
+        bpy.utils.register_class(VSENDLESS4_OT_CreateWorkspace)
+    except Exception as e:
+        print(f"[APT] Error registering VSENDLESS4_OT_CreateWorkspace: {e}")
+        raise
 
 def unregister():
-    bpy.utils.unregister_class(VSENDLESS4_OT_CreateWorkspace)
+    try:
+        bpy.utils.unregister_class(VSENDLESS4_OT_CreateWorkspace)
+    except Exception as e:
+        print(f"[APT] Error unregistering VSENDLESS4_OT_CreateWorkspace: {e}")

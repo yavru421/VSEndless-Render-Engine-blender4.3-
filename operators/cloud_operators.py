@@ -87,13 +87,23 @@ class VSEndless_PT_CloudPanel(bpy.types.Panel):
         box2.label(text="• No hardware limits")
 
 def register():
-    bpy.utils.register_class(VSEndless_OT_CloudRenderSubmit)
-    bpy.utils.register_class(VSEndless_OT_CloudStatus)
-    bpy.utils.register_class(VSEndless_PT_CloudPanel)
-    logger.info("VSEndless Cloud operators registered (preview mode)")
+    try:
+        for cls in [VSEndless_OT_CloudRenderSubmit, VSEndless_OT_CloudStatus, VSEndless_PT_CloudPanel]:
+            try:
+                bpy.utils.unregister_class(cls)
+            except Exception:
+                pass
+            bpy.utils.register_class(cls)
+        logger.info("VSEndless Cloud operators registered (preview mode)")
+    except Exception as e:
+        logger.warning(f"Cloud operator registration issue: {e}")
+        raise
 
 def unregister():
-    bpy.utils.unregister_class(VSEndless_OT_CloudRenderSubmit)
-    bpy.utils.unregister_class(VSEndless_OT_CloudStatus)
-    bpy.utils.unregister_class(VSEndless_PT_CloudPanel)
-    logger.info("VSEndless Cloud operators unregistered")
+    try:
+        bpy.utils.unregister_class(VSEndless_OT_CloudRenderSubmit)
+        bpy.utils.unregister_class(VSEndless_OT_CloudStatus)
+        bpy.utils.unregister_class(VSEndless_PT_CloudPanel)
+        logger.info("VSEndless Cloud operators unregistered")
+    except Exception as e:
+        logger.warning(f"Cloud operator unregistration issue: {e}")

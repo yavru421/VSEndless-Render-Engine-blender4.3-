@@ -163,12 +163,16 @@ class VSEndless_PT_RenderProperties(bpy.types.Panel):
 
 def register():
     try:
-        bpy.utils.register_class(VSEndless_PT_RenderProperties)
-        bpy.utils.register_class(VSEndless_PT_StripPanel)
-        bpy.utils.register_class(VSEndless_PT_VSEPanel)
+        for cls in [VSEndless_PT_RenderProperties, VSEndless_PT_StripPanel, VSEndless_PT_VSEPanel]:
+            try:
+                bpy.utils.unregister_class(cls)
+            except Exception:
+                pass
+            bpy.utils.register_class(cls)
         logger.info("VSEndless UI panels registered")
-    except RuntimeError as e:
+    except Exception as e:
         logger.warning(f"UI panel registration issue: {e}")
+        raise
 
 def unregister():
     try:
@@ -176,5 +180,5 @@ def unregister():
         bpy.utils.unregister_class(VSEndless_PT_StripPanel)
         bpy.utils.unregister_class(VSEndless_PT_VSEPanel)
         logger.info("VSEndless UI panels unregistered")
-    except RuntimeError as e:
+    except Exception as e:
         logger.warning(f"UI panel unregistration issue: {e}")
