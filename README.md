@@ -52,11 +52,13 @@ A robust APT-compliant GPU-accelerated render engine for Blender's Video Sequenc
 >
 > **💾 Quality**: Professional H.264 NVENC encoding with hardware acceleration
 
+[![VSEndless Performance Demo](https://img.youtube.com/vi/pEHg47Aq9nw/maxresdefault.jpg)](https://youtu.be/pEHg47Aq9nw)
+
+**🎥 [Watch VSEndless in Action on YouTube](https://youtu.be/pEHg47Aq9nw)** - See the complete render process in real-time!
+
 ![VSEndless In Action](VSEndless_In_Action/vsendless.rippin.png)
 
-*See `VSEndless_In_Action/` folder for detailed screenshots and performance documentation*
-
-## 📋 Requirements
+*See `VSEndless_In_Action/` folder for detailed screenshots and performance documentation*## 📋 Requirements
 
 ### System Requirements
 - **Operating System**: Windows 10/11, macOS 10.15+, or Linux (Ubuntu 20.04+)
