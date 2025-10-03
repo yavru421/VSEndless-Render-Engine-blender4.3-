@@ -45,7 +45,7 @@ class VSEndless_PT_VSEPanel(bpy.types.Panel):
 
         # GPU & Codec Settings
         box2 = layout.box()
-        box2.label(text="GPU & Codec Settings", icon='GPU')
+        box2.label(text="GPU & Codec Settings", icon='CONSOLE')
         if hasattr(scene, 'use_hwaccel'):
             box2.prop(scene, "use_hwaccel")
         if hasattr(scene, 'hwaccel_method'):
@@ -67,7 +67,7 @@ class VSEndless_PT_VSEPanel(bpy.types.Panel):
 
         # Post-Processing
         box3 = layout.box()
-        box3.label(text="Post-Processing", icon='MODIFIER')
+        box3.label(text="Post-Processing", icon='TOOL_SETTINGS')
         if hasattr(scene, 'enable_denoising'):
             box3.prop(scene, "enable_denoising")
         if hasattr(scene, 'use_gpu_denoising'):
@@ -91,7 +91,7 @@ class VSEndless_PT_VSEPanel(bpy.types.Panel):
         layout.operator("vsendless.render_queue", icon='SEQ_SEQUENCER')
         if hasattr(scene, 'vsendless_rtmp_url'):
             layout.operator("vsendless.stream", icon='URL')
-        layout.operator("vsendless.check_gpu", icon='GPU')
+        layout.operator("vsendless.check_gpu", icon='CONSOLE')
 
 class VSEndless_PT_StripPanel(bpy.types.Panel):
     bl_label = "VSEndless Strip Filters"
@@ -150,7 +150,7 @@ class VSEndless_PT_RenderProperties(bpy.types.Panel):
 
         # GPU Settings
         box2 = layout.box()
-        box2.label(text="GPU Acceleration", icon='GPU')
+        box2.label(text="GPU Acceleration", icon='CONSOLE')
         if hasattr(scene, 'use_hwaccel'):
             box2.prop(scene, "use_hwaccel")
             if scene.use_hwaccel and hasattr(scene, 'hwaccel_method'):
@@ -159,7 +159,7 @@ class VSEndless_PT_RenderProperties(bpy.types.Panel):
         # Quick actions
         layout.separator()
         layout.operator("vsendless.render", text="Render Animation", icon='RENDER_ANIMATION')
-        layout.operator("vsendless.check_gpu", text="Check GPU Capabilities", icon='GPU')
+        layout.operator("vsendless.check_gpu", text="Check GPU Capabilities", icon='CONSOLE')
 
 def register():
     try:
