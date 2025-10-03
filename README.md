@@ -60,6 +60,26 @@ A robust APT-compliant GPU-accelerated render engine for Blender's Video Sequenc
 
 *See `VSEndless_In_Action/` folder for detailed screenshots and performance documentation*## 📋 Requirements
 
+<p align="center">
+  <img src="https://img.shields.io/badge/Frames%20per%20Minute-51-brightgreen"/>
+  <img src="https://img.shields.io/badge/4K-Ready-blue"/>
+  <img src="https://img.shields.io/badge/GPU-NVIDIA%20NVENC-yellow"/>
+</p>
+
+<p align="center">
+  <img src="VSEndless_In_Action/performance_chart.png" alt="VSEndless Render Performance" height="180"/>
+</p>
+
+| Metric            | Value         |
+|-------------------|--------------|
+| Frames Rendered   | 1834         |
+| Resolution        | 1920x1080    |
+| Codec             | H.264 NVENC  |
+| Render Time       | 35:58        |
+| Frames per Minute | 51           |
+| GPU               | NVIDIA NVENC |
+
+
 ### System Requirements
 - **Operating System**: Windows 10/11, macOS 10.15+, or Linux (Ubuntu 20.04+)
 - **Blender Version**: 4.0.0 or newer (tested with 4.3+)
