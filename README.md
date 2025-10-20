@@ -50,7 +50,7 @@ A robust APT-compliant GPU-accelerated render engine for Blender's Video Sequenc
 ### Real-World Performance Test
 > **🎯 VALIDATED PERFORMANCE**: 1834 frames @ 1920x1080, 30fps, H.264 NVENC
 >
-> **⚡ Render Time**: 35 minutes 58 seconds
+> **⚡ Render Time**: 3 minutes 58 seconds
 >
 > **🚀 Speed**: ~51 frames per minute with GPU acceleration
 >
